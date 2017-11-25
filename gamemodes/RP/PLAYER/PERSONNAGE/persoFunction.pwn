@@ -15,7 +15,7 @@
 
 stock InitPerso(playerid)
 {
-  InitPlayer(playerid);
+  TogglePlayerSpectating(playerid, false);
   SpawnPlayer(playerid);
   SetPlayerInterior(playerid, 1);
   SetPlayerPos(playerid, 453.181640625, -18.0888671875, 1001.1328125);

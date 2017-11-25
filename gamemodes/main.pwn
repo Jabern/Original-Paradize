@@ -83,7 +83,6 @@ GameMode::Init()
 {
 	static
 		_exec;
-	LoadMap();
 	_exec = GetTickCount();
 	SetGameModeText("OP:SA V0.1");
 	printf("Original Paradize V%s LOADED", SERVER_VERSION);

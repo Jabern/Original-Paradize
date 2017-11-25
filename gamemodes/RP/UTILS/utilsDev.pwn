@@ -14,6 +14,8 @@ TODO : Trace Back function
 	#error Impossible de Charger y_timers , introuvable
 #endif
 
+#include <sscanf2>
+
 new PlayerText:DevPanel[15][MAX_PLAYERS];
 new bool:isDev[MAX_PLAYERS];
 new bool:panelState[MAX_PLAYERS];
@@ -262,6 +264,15 @@ CMD:outputconsole(playerid, params[])
       return 0;
     }
   }
+  return CMD_SUCCESS;
+}
+
+CMD:CreateObject(playerid, params[])
+{
+  new objID, Float:x, Float:y, Float:z;
+  if(sscanf(params,"i", objID)) return SendClientMessage(playerid,COLOR_RED,"USAGE: /CreateObject <id>");
+  GetPlayerPos(playerid, x, y, z);
+  CreateDynamicObject(objID, x, y, z, 0,0,0);
   return CMD_SUCCESS;
 }
 

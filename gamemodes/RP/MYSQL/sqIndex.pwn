@@ -21,4 +21,10 @@
 	#error Impossible de Charger le Fichier Mysql , sqFunction introuvable
 #endif
 
+#tryinclude "RP/MYSQL/sqConfig.pwn"
+
+#if !defined COMPTE_TAB
+	#error Impossible de Charger le Fichier Mysql , sqConfig introuvable
+#endif
+
 stock _sql();

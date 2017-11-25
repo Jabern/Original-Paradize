@@ -23,7 +23,7 @@
 	#define MYSQL_PASS ""
 #elseif SERVER_ENVIRONMENT == 2
 	#define MYSQL_HOST "localhost"
-	#define MYSQL_BDD "tdm"
+	#define MYSQL_BDD "rp"
 	#define MYSQL_USER "root"
 	#define MYSQL_PASS ""
 #endif
@@ -35,8 +35,9 @@ stock
 GameMode::Init()
 {
 	_Connect = mysql_connect(MYSQL_HOST, MYSQL_USER, MYSQL_PASS, MYSQL_BDD);
-	if(mysql_errno() != 0)	print("Connection mysql échouer !");
+	if(mysql_errno() != 0)	print("Connection mysql échouer !"), SendRconCommand("exit");
 	else print("Connection mysql réussi !");
+	MysqlInit();
 	mysql_log(ALL);
 	return 1;
 }

@@ -56,19 +56,65 @@ Dialog:Connection(playerid, response, listitem, inputtext[])
 
 /**----------------------------------------------------**/
 
+stock IntToBoolString(int)
+{
+	new string[25];
+	switch(int)
+	{
+		case 0:
+		{
+			format(string, sizeof(string), "False");
+		}
+		case 1:
+		{
+			format(string, sizeof(string), "True");
+		}		
+	}
+	return string;
+}
+
 public CheckPass(playerid)
 {
 	static
-				pass[129];
+				string[129], query[129], pass[129];
 	cache_get_value_name(0, "Password", pass);
 
 	if(strcmp(pass, PlayerData[playerid][pPassword], true) == 0)
 	{
-		TogglePlayerSpectating(playerid, false);
-		InitPerso(playerid);
-		//InitPlayer(playerid);
+		mysql_format(_Connect, query, sizeof(query), "SELECT * FROM `compte` WHERE `Username` = '%s'", PlayerData[playerid][pName]);
+		mysql_tquery(_Connect, query, "InitPerso", "i", playerid);
+
+		format(string, sizeof(string), "Map\tDownload\nVice City\t%s\nLiberty City\t%s", IntToBoolString(PlayerData[playerid][ViceCity]), IntToBoolString(PlayerData[playerid][LibertyCity]));
+		Dialog_Show(playerid, City, DIALOG_STYLE_TABLIST_HEADERS, "Map", string, "Spawn", "Annuler");
 	}
 	else return Dialog_Show(playerid, Connection, DIALOG_STYLE_PASSWORD, "Connexion","Erreur :( MDP Incorrect : Veuillez insérer votre Mot De Passe pour vous Connecter :)", "Connexion", "Annuler");
 
+	return 1;
+}
+
+/**----------------------------------------------------**/
+
+Dialog:City(playerid, response, listitem, inputtext[])
+{
+	if(response)
+	{
+		switch(listitem)
+		{
+			case 0:
+			{
+				switch(PlayerData[playerid][ViceCity])
+				{
+					case 0:
+					{
+						DownloadMap(MAP_VC);
+					}
+					case 1:
+					{
+						InitPerso(playerid);
+					}
+				}
+			}
+		}
+	}
 	return 1;
 }

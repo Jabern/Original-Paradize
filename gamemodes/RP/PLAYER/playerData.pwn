@@ -34,7 +34,10 @@ enum _adata
 
   PlayerText3D:pActorText1,
   PlayerText3D:pActorText2,
-  PlayerText3D:pActorText3
+  PlayerText3D:pActorText3,
+
+  ViceCity,
+  LibertyCity
 }
 stock
     PlayerData[MAX_PLAYERS][_adata],

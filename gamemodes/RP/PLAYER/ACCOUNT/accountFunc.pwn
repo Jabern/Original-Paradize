@@ -8,9 +8,12 @@ stock IsPlayerLoged(playerid)
    return PlayerData[playerid][pSpawn];
  }
 
- stock InitPlayer(playerid)
+ forward InitPlayer(playerid);
+ public InitPlayer(playerid)
  {
    PlayerData[playerid][pLogged] = true;
+   cache_get_value_int(0, "Vice", PlayerData[playerid][ViceCity]);
+   cache_get_value_int(0, "Liberty", PlayerData[playerid][LibertyCity]);
    return 1;
  }
 
